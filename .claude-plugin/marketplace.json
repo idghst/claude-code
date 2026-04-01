@@ -1,0 +1,16 @@
+{
+  "name": "claude-code-plugins",
+  "version": "1.0.0",
+  "description": "Bundled plugins for Claude Code including Agent SDK development tools, PR review toolkit, and commit workflows",
+  "owner": {
+    "name": "idghst"
+  },
+  "plugins": [
+    {
+      "name": "next-js",
+      "description": "Development kit for working with the Claude Agent SDK",
+      "source": "./plugins/next-js",
+      "category": "development"
+    }
+  ]
+}
