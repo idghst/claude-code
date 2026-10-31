@@ -232,7 +232,7 @@ function main() {
     return;
   }
   for (const required of ["src/lib/auth.ts", "src/lib/supabase/server.ts", "src/components/ui/field.tsx"]) {
-    if (!fs.existsSync(path.join(root, required))) throw new Error(`${required}가 없습니다. /web:nextjs-init으로 만든 프로젝트에서 실행하세요.`);
+    if (!fs.existsSync(path.join(root, required))) throw new Error(`${required}가 없습니다. /web:web-nextjs-init으로 만든 프로젝트에서 실행하세요.`);
   }
   const conflicts = Object.keys(files).filter((rel) => fs.existsSync(path.join(root, rel)));
   if (conflicts.length && !args.force) throw new Error(`이미 있는 파일: ${conflicts.join(", ")}. 덮어쓰려면 --force.`);

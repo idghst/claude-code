@@ -1,4 +1,4 @@
-// supabase-table과 nextjs-feature가 함께 쓰는 필드 정의 파서.
+// web-supabase-table과 web-nextjs-feature가 함께 쓰는 필드 정의 파서.
 // 형식: "이름:타입[:required][:default=값][:ref=테이블]" 를 쉼표로 구분.
 // 예: "title:text:required,views:integer:default=0,category_id:uuid:ref=categories"
 

@@ -61,7 +61,7 @@ export function buildMigration({ table, fields, access = "owner" }) {
     grants.push(`grant select on ${t} to authenticated;`);
   }
 
-  return `-- ${table}: /web:supabase-table 로 생성 (access: ${access})
+  return `-- ${table}: /web:web-supabase-table 로 생성 (access: ${access})
 
 create table ${t} (
 ${columns.map((c) => `  ${c}`).join(",\n")}

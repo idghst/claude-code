@@ -46,7 +46,7 @@ supabase/migrations/         # SQL 마이그레이션
 - secret 키·`SUPABASE_SECRET_KEY`에 `NEXT_PUBLIC_` 접두사를 붙이지 않는다.
 - 모든 테이블에 RLS를 켜고 정책은 CRUD별로 나눈다(`FOR ALL` 금지). `auth.uid()`는 `(select auth.uid())`로 감싸고 정책에 쓰는 컬럼에 인덱스를 건다.
 - 인가 정보는 `raw_app_meta_data`에 둔다. `raw_user_meta_data`는 사용자가 수정할 수 있다.
-- 테이블 추가는 `/web:supabase-table`, 화면·Server Action 추가는 `/web:nextjs-feature`를 쓴다.
+- 테이블 추가는 `/web:web-supabase-table`, 화면·Server Action 추가는 `/web:web-nextjs-feature`를 쓴다.
 
 ### 코드
 - Server Component 우선. `"use client"`는 상호작용이 필요한 가장 작은 컴포넌트에만.

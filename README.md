@@ -19,7 +19,7 @@ Claude Code 2.1.275 이상에서는 한 번에 설치할 수 있습니다.
 
 | 플러그인 | 설명 | 구성 요소 |
 |---|---|---|
-| `web` | Next.js + Supabase 웹 개발 도구 | 스킬 4개: `nextjs-init`(보안 기본값을 갖춘 프로젝트 생성), `supabase-table`(테이블·RLS 마이그레이션), `nextjs-feature`(보호 화면·Server Action 생성), `web-security-audit`(정적 보안 점검) |
+| `web` | Next.js + Supabase 웹 개발 도구 | 스킬 4개: `web-nextjs-init`(보안 기본값을 갖춘 프로젝트 생성), `web-supabase-table`(테이블·RLS 마이그레이션), `web-nextjs-feature`(보호 화면·Server Action 생성), `web-security-audit`(정적 보안 점검) |
 | `pstack` | [cursor/plugins](https://github.com/cursor/plugins)의 pstack 사본 (MIT, Lauren Tan) | 원칙 기반 에이전트 워크플로 스킬과 서브에이전트 |
 
 ## 개발
