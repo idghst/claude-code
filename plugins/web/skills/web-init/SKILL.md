@@ -1,5 +1,5 @@
 ---
-name: web-nextjs-init
+name: web-init
 description: >
   Next.js 16 + Supabase + shadcn/ui + Tailwind v4 + pnpm + Pretendard 웹 프로젝트를 보안 기본값(CSP nonce, getClaims 인증,
   publishable/secret 키 분리, RLS 규칙)과 함께 새로 만든다. 로그인·회원가입·이메일 확인·보호 페이지까지 동작하는 상태로 생성하고
@@ -104,6 +104,6 @@ placeholder `.env.local`로도 빌드는 성공해야 한다.
 사용자에게 다음을 알린다.
 1. `.env.local`에 실제 값 넣기: Supabase 대시보드 > Project Settings > API Keys의 publishable·secret 키, Project URL, project ref.
 2. Supabase Auth 설정: Authentication > URL Configuration의 Site URL과 Redirect URL에 `http://localhost:3000/auth/confirm` 추가. 이메일 템플릿의 확인 링크를 `{{ .SiteURL }}/auth/confirm?token_hash={{ .TokenHash }}&type=email&next=/dashboard`로 변경.
-3. 다음 단계: 테이블은 `/web:web-supabase-table`, 화면은 `/web:web-nextjs-feature`, 점검은 `/web:web-security-audit`.
+3. 다음 단계: 테이블은 `/web:web-supabase-table`, 화면은 `/web:web-feature`, 점검은 `/web:web-security-audit`.
 
 git 초기화는 create-next-app이 이미 했다. 커밋은 사용자가 요청할 때만 한다.

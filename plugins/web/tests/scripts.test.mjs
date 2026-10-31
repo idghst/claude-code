@@ -6,7 +6,7 @@ import path from "node:path";
 import test from "node:test";
 import { parseFields } from "../scripts/lib/fields.mjs";
 import { buildMigration, nextVersion } from "../skills/web-supabase-table/scripts/new-table.mjs";
-import { buildFeature } from "../skills/web-nextjs-feature/scripts/new-feature.mjs";
+import { buildFeature } from "../skills/web-feature/scripts/new-feature.mjs";
 import { audit } from "../skills/web-security-audit/scripts/audit.mjs";
 
 test("parseFields: 옵션 파싱", () => {

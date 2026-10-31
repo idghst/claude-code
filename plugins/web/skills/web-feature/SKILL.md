@@ -1,8 +1,8 @@
 ---
-name: web-nextjs-feature
+name: web-feature
 description: >
   Supabase 테이블 하나에 대한 로그인 필요 화면을 만든다: zod 스키마, 목록 페이지(Server Component), 생성 폼(react-hook-form + shadcn field),
-  생성·삭제 Server Action. requireUser(), force-dynamic, 서버 측 재검증, RLS 의존 규칙이 자동으로 들어간다. web-nextjs-init 프로젝트 기준.
+  생성·삭제 Server Action. requireUser(), force-dynamic, 서버 측 재검증, RLS 의존 규칙이 자동으로 들어간다. web-init 프로젝트 기준.
 when_to_use: >
   "게시판/목록/CRUD 화면 만들어줘", "폼 페이지 추가", "관리 페이지", "Server Action 추가" 등 테이블 기반 기능 화면이 필요할 때.
   테이블이 아직 없으면 먼저 /web:web-supabase-table.
@@ -13,7 +13,7 @@ argument-hint: "[table-name] [fields]"
 
 ## 1. 전제 확인
 
-- 프로젝트가 `/web:web-nextjs-init`으로 만들어졌는지 확인한다(`src/lib/auth.ts`가 있어야 함).
+- 프로젝트가 `/web:web-init`으로 만들어졌는지 확인한다(`src/lib/auth.ts`가 있어야 함).
 - 대상 테이블이 있어야 한다. 없으면 같은 정의로 `/web:web-supabase-table`을 먼저 진행한다.
 - 필드 정의는 web-supabase-table과 같은 문법(`이름:타입[:required]...`)을 쓰고, 테이블 컬럼과 일치시킨다. `jsonb` 컬럼은 폼에서 빼야 한다.
 - 테이블 `--access`가 `read-only`이면 생성·삭제가 RLS에 막힌다. 그 경우 생성 폼과 삭제 버튼을 지우거나 사용자와 방식을 정한다.

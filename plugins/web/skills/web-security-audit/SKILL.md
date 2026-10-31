@@ -6,7 +6,7 @@ description: >
   CSP·.gitignore 누락을 파일:줄 단위로 찾고, 스크립트가 못 보는 부분은 체크리스트로 직접 검토해 고친다.
 when_to_use: >
   "보안 점검", "보안 검토", "security audit", "배포 전 점검", "RLS 확인", "키 노출 확인" 등을 요청받았을 때,
-  그리고 web-nextjs-init·web-supabase-table·web-nextjs-feature 작업을 마친 뒤.
+  그리고 web-init·web-supabase-table·web-feature 작업을 마친 뒤.
 argument-hint: "[project-dir]"
 ---
 

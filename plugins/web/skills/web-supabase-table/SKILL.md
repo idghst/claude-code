@@ -2,7 +2,7 @@
 name: web-supabase-table
 description: >
   Supabase 테이블 마이그레이션을 RLS 정책(CRUD별, (select auth.uid()) 최적화), 인덱스, grant, updated_at 트리거까지 포함해 생성하고
-  적용·타입 생성까지 진행한다. web-nextjs-init으로 만든 프로젝트 기준.
+  적용·타입 생성까지 진행한다. web-init으로 만든 프로젝트 기준.
 when_to_use: >
   "테이블 만들어줘", "DB 스키마 추가", "Supabase 테이블", "마이그레이션 생성", "RLS 정책" 등 Supabase에 새 테이블이 필요할 때.
   기존 테이블 변경(alter)에는 스크립트를 쓰지 않고 아래 규칙대로 직접 SQL을 쓴다.
@@ -24,7 +24,7 @@ argument-hint: "[table-name] [fields]"
 | `boolean` | boolean | `default=false` 권장 |
 | `date`, `timestamptz` | 같음 | |
 | `uuid` | uuid | `ref=테이블`이면 FK + 인덱스 |
-| `jsonb` | jsonb | 폼 생성(web-nextjs-feature) 미지원 |
+| `jsonb` | jsonb | 폼 생성(web-feature) 미지원 |
 
 기본값은 숫자, `true`/`false`, `now()`, `gen_random_uuid()`, `'문자열'`만 허용한다.
 `id`, `user_id`, `created_at`, `updated_at`은 자동으로 들어가므로 지정하지 않는다.
@@ -71,7 +71,7 @@ pnpm db:types
 
 ## 5. 다음 단계
 
-화면이 필요하면 같은 `--name`, `--fields`로 `/web:web-nextjs-feature`를 이어서 실행한다.
+화면이 필요하면 같은 `--name`, `--fields`로 `/web:web-feature`를 이어서 실행한다.
 
 ## 기존 테이블 변경 규칙 (직접 SQL 작성 시)
 
