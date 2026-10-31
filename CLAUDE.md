@@ -29,7 +29,7 @@ plugins/<plugin>/
 
 외부 플러그인은 복사하지 않고 `git-subdir`/`github` 소스로 원본을 참조한다(예: `pstack`). 엔트리 `name`은 원본 `plugin.json`의 `name`과 같게 한다.
 
-claude.ai/Cowork 조직 동기화 조건: 이 저장소가 private/internal이어야 하고, 소스는 `./` 상대 경로·`github`·`url`·`git-subdir`만 허용되며, 최상위 `bin/`이 있는 플러그인은 거부된다.
+claude.ai/Cowork 조직 동기화 조건: 이 저장소가 private/internal이어야 하고, 소스는 `./` 상대 경로·`github`·`url`·`git-subdir`만 허용되며(`url`·`git-subdir`의 `url`은 `owner/repo` 축약 대신 `https://` 전체 URL),  최상위 `bin/`이 있는 플러그인은 거부된다.
 
 예약 이름 금지: `claude-`, `anthropic-` 접두어, `claude`, `claude-code`, `anthropic` 등.
 
