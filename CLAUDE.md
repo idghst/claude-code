@@ -27,7 +27,17 @@ plugins/<plugin>/
 3. README의 플러그인 목록 표에 한 줄 추가.
 4. `claude plugin validate .` 와 `claude plugin validate ./plugins/<plugin>` 실행.
 
-외부 플러그인은 복사하지 않고 `git-subdir`/`github` 소스로 원본을 참조한다(예: `pstack`). 엔트리 `name`은 원본 `plugin.json`의 `name`과 같게 한다.
+외부 플러그인은 기본적으로 `git-subdir`/`github` 소스로 원본을 참조한다. 엔트리 `name`은 원본 `plugin.json`의 `name`과 같게 한다.
+
+예외: `plugins/pstack`은 claude.ai 동기화 경고(`$schema` 키)를 없애려고 복사한 사본이다. 원본은 cursor/plugins의 `harness/pstack/claude-code`(마지막 동기화 커밋 `4dd1d05`, v0.15.36). 직접 수정하지 않는다. 갱신 절차:
+
+```bash
+git clone --depth 1 --filter=blob:none --sparse https://github.com/cursor/plugins.git "$TMPDIR/cp" && git -C "$TMPDIR/cp" sparse-checkout set harness/pstack/claude-code
+rm -rf plugins/pstack && cp -R "$TMPDIR/cp/harness/pstack/claude-code" plugins/pstack
+sed -i '' '/"\$schema"/d' plugins/pstack/plugin.json plugins/pstack/.claude-plugin/plugin.json
+```
+
+갱신 후 위 커밋·버전 표기를 고친다.
 
 claude.ai/Cowork 조직 동기화 조건: 이 저장소가 private/internal이어야 하고, 소스는 `./` 상대 경로·`github`·`url`·`git-subdir`만 허용되며(`url`·`git-subdir`의 `url`은 `owner/repo` 축약 대신 `https://` 전체 URL),  최상위 `bin/`이 있는 플러그인은 거부된다.
 

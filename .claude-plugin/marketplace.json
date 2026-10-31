@@ -14,12 +14,8 @@
     },
     {
       "name": "pstack",
-      "description": "Lauren Tan의 pstack (cursor/plugins 원본 참조): 원칙 기반 에이전트 워크플로와 스킬 모음",
-      "source": {
-        "source": "git-subdir",
-        "url": "https://github.com/cursor/plugins.git",
-        "path": "harness/pstack/claude-code"
-      },
+      "description": "Lauren Tan의 pstack (cursor/plugins 사본): 원칙 기반 에이전트 워크플로와 스킬 모음",
+      "source": "./plugins/pstack",
       "category": "development"
     }
   ]
