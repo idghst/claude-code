@@ -7,9 +7,9 @@
   },
   "plugins": [
     {
-      "name": "next-js",
-      "description": "Next.js + Supabase + ShadCN 프로젝트 초기화 등 Next.js 개발용 도구",
-      "source": "./plugins/next-js",
+      "name": "web",
+      "description": "웹 개발 도구: Next.js + Supabase + ShadCN 프로젝트 초기화 등",
+      "source": "./plugins/web",
       "category": "development"
     },
     {
@@ -18,5 +18,8 @@
       "source": "./plugins/pstack",
       "category": "development"
     }
-  ]
+  ],
+  "renames": {
+    "next-js": "web"
+  }
 }

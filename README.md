@@ -6,20 +6,20 @@
 
 ```bash
 /plugin marketplace add idghst/claude-code
-/plugin install next-js@idghst-claude-code-plugins
+/plugin install web@idghst-claude-code-plugins
 ```
 
 Claude Code 2.1.275 이상에서는 한 번에 설치할 수 있습니다.
 
 ```bash
-/plugin install next-js --marketplace idghst/claude-code
+/plugin install web --marketplace idghst/claude-code
 ```
 
 ## 플러그인 목록
 
 | 플러그인 | 설명 | 구성 요소 |
 |---|---|---|
-| `next-js` | Next.js 개발용 도구 | 스킬 `nextjs-init`: Next.js + Supabase + ShadCN + pnpm + Pretendard 프로젝트를 보안 설정까지 포함해 초기화 |
+| `web` | 웹 개발(Next.js) 도구 | 스킬 `nextjs-init`: Next.js + Supabase + ShadCN + pnpm + Pretendard 프로젝트를 보안 설정까지 포함해 초기화 |
 | `pstack` | [cursor/plugins](https://github.com/cursor/plugins)의 pstack 사본 (MIT, Lauren Tan) | 원칙 기반 에이전트 워크플로 스킬과 서브에이전트 |
 
 ## 개발
