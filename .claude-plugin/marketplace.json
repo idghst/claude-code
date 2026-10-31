@@ -8,7 +8,7 @@
   "plugins": [
     {
       "name": "web",
-      "description": "웹 개발 도구: Next.js + Supabase + ShadCN 프로젝트 초기화 등",
+      "description": "Next.js + Supabase 웹 개발 도구: 초기화, 테이블·RLS, 기능 화면, 보안 점검",
       "source": "./plugins/web",
       "category": "development"
     },

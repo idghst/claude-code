@@ -1,207 +1,109 @@
 ---
 name: nextjs-init
 description: >
-  Next.js + Supabase + ShadCN + pnpm + Pretendard 스택의 웹 프로젝트를 보안 베스트 프랙티스 기반으로 초기화하는 스킬.
-  "프로젝트 초기화", "프로젝트 셋업", "프로젝트 세팅", "init project", "새 프로젝트 만들어줘",
-  "웹 프로젝트 시작", "보일러플레이트 생성", "프로젝트 scaffolding" 등의 요청 시 반드시 사용.
-  Next.js, Supabase, ShadCN, pnpm, Pretendard 중 하나라도 언급되면서 프로젝트 시작/초기화를 요청하면 이 스킬을 트리거할 것.
-  Claude Code 환경에서 실행되며, 항상 동일한 결과를 보장하는 결정론적 초기화 프로세스를 따름.
+  Next.js 16 + Supabase + shadcn/ui + Tailwind v4 + pnpm + Pretendard 웹 프로젝트를 보안 기본값(CSP nonce, getClaims 인증,
+  publishable/secret 키 분리, RLS 규칙)과 함께 새로 만든다. 로그인·회원가입·이메일 확인·보호 페이지까지 동작하는 상태로 생성하고
+  빌드·린트·타입체크·보안 점검까지 통과시킨다.
+when_to_use: >
+  "프로젝트 초기화", "새 웹 프로젝트", "Next.js 프로젝트 만들어줘", "Supabase 붙은 보일러플레이트", "init project",
+  "프로젝트 셋업/세팅/scaffolding" 등 새 Next.js 웹 프로젝트를 시작할 때. 기존 프로젝트 수정에는 쓰지 않는다.
+argument-hint: "[project-name]"
 ---
 
-# Next.js 프로젝트 초기화 스킬
+# Next.js + Supabase 프로젝트 초기화
 
-## 개요
+고정 스택으로 프로젝트를 만든다. 코드는 `assets/template/`의 실제 파일을 스크립트로 복사하므로 매번 같은 결과가 나온다. 템플릿 코드를 손으로 다시 쓰지 않는다.
 
-이 스킬은 아래 고정 스택으로 웹 프로젝트를 초기화한다.
-매번 동일한 결과를 보장하기 위해, 모든 단계를 순서대로 실행하며 사용자 확인 없이 자동 진행한다.
+| 항목 | 값 |
+|---|---|
+| Framework | Next.js 최신 (App Router, `src/`, Turbopack, Cache Components 끔) |
+| DB/Auth | Supabase (`@supabase/ssr`, publishable/secret 키) |
+| UI | shadcn/ui `radix-nova` + `sonner` + `field` |
+| Styling | Tailwind CSS v4 (CSS-first, `tailwind.config` 없음) |
+| Form | react-hook-form + zod 4 + `@hookform/resolvers@^5` |
+| Font | Pretendard Variable (`next/font/local`) |
 
-| 항목 | 고정값 |
-|------|--------|
-| Framework | Next.js (최신 stable, App Router) |
-| DB/Auth | Supabase (@supabase/ssr) |
-| UI | ShadCN UI |
-| Package Manager | pnpm |
-| Font | Pretendard (Variable, local) |
-| Language | TypeScript (strict) |
-| Styling | Tailwind CSS |
-| Validation | zod + react-hook-form |
+## 0. 사전 확인
 
-## 실행 전 확인
+1. 프로젝트 이름: 인자 `$ARGUMENTS`가 있으면 쓰고, 없으면 사용자에게 한 번만 묻는다. 소문자·숫자·하이픈만 허용.
+2. 만들 위치: 현재 디렉터리 아래 `<name>/`. 이미 있으면 멈추고 알린다.
+3. `node -v`가 20.9 이상, `pnpm -v`가 있는지 확인한다. 없으면 설치 방법을 알리고 멈춘다.
 
-1. 사용자에게 **프로젝트 이름**을 반드시 확인한다 (예: `my-app`)
-2. Supabase 프로젝트 URL과 Anon Key를 가지고 있는지 확인한다 (없으면 `.env.local`에 placeholder로 생성)
-3. 프로젝트 생성 경로를 확인한다 (기본: 현재 디렉토리)
+이 외에는 묻지 않고 아래 순서대로 끝까지 진행한다.
 
-## 초기화 프로세스 (순서 엄수)
-
-### Phase 1: 프로젝트 생성
+## 1. 프로젝트 생성
 
 ```bash
-pnpm create next-app@latest <project-name> \
-  --typescript \
-  --tailwind \
-  --eslint \
-  --app \
-  --src-dir \
-  --import-alias "@/*" \
-  --turbopack \
-  --yes
-
-cd <project-name>
+pnpm create next-app@latest <name> --ts --tailwind --eslint --app --src-dir --import-alias "@/*" \
+  --use-pnpm --no-react-compiler --no-cache-components --yes
+cd <name>
 ```
 
-### Phase 2: 핵심 패키지 설치
+- `--no-cache-components`: nonce 기반 CSP는 동적 렌더링이 필요해 Cache Components(PPR)와 함께 쓸 수 없다.
+- `--turbopack` 플래그는 없다(기본값). 넣으면 실패한다.
+
+## 2. 패키지 설치
 
 ```bash
-# Supabase
-pnpm add @supabase/supabase-js @supabase/ssr
-
-# Validation
-pnpm add zod react-hook-form @hookform/resolvers
-
-# Theming
-pnpm add next-themes
-
-# Dev dependencies
-pnpm add -D @types/node
+pnpm add @supabase/supabase-js @supabase/ssr zod react-hook-form "@hookform/resolvers@^5" next-themes server-only
+pnpm add -D pretendard
 ```
 
-### Phase 3: ShadCN UI 초기화
+## 3. shadcn 초기화
+
+프롬프트가 뜨지 않도록 옵션을 모두 주고 stdin을 막는다.
 
 ```bash
-pnpm dlx shadcn@latest init -y -d
+pnpm dlx shadcn@latest init -t next -b radix -p nova -y --no-monorepo </dev/null
+pnpm dlx shadcn@latest add button input label card field sonner -y </dev/null
 ```
 
-초기화 후 필수 컴포넌트 설치:
+`toast`, `form` 컴포넌트는 쓰지 않는다(radix-nova에서 제거됨, `sonner`·`field`로 대체).
+
+## 4. 템플릿 적용
 
 ```bash
-pnpm dlx shadcn@latest add button input label card form toast sonner
+node "${CLAUDE_SKILL_DIR}/scripts/apply-template.mjs" . --name <name>
 ```
 
-### Phase 4: Pretendard 폰트 설정
+스크립트가 하는 일:
+- `assets/template/` 복사(`{{PROJECT_NAME}}` 치환). 기본 `layout.tsx`, `page.tsx`만 덮어쓰고 다른 파일이 이미 있으면 아무것도 쓰지 않고 멈춘다.
+- Pretendard 폰트를 `src/app/fonts/`로 복사, `supabase/migrations/` 생성.
+- `.env.local`이 없으면 `.env.example`로 placeholder 생성, `.gitignore`에 `.env*`·`!.env.example` 보장.
+- `package.json`에 `typecheck`, `db:types` 스크립트 추가, `next.config.ts`에 `poweredByHeader: false` 추가.
 
-1. `src/app/fonts/` 디렉토리를 생성한다
-2. Pretendard Variable 폰트 파일(`PretendardVariable.woff2`)을 다운로드하거나, CDN fallback을 설정한다
-3. `src/app/layout.tsx`에서 `next/font/local`로 로드한다
+`✘`로 끝나면 메시지대로 앞 단계를 고친 뒤 다시 실행한다.
 
-```typescript
-// src/app/layout.tsx
-import localFont from "next/font/local";
+생성되는 주요 파일:
 
-const pretendard = localFont({
-  src: "./fonts/PretendardVariable.woff2",
-  display: "swap",
-  weight: "45 920",
-  variable: "--font-pretendard",
-});
+| 파일 | 역할 |
+|---|---|
+| `src/proxy.ts` | CSP nonce, 보안 헤더, 세션 갱신 (인가 판단 안 함) |
+| `src/lib/supabase/{client,server,proxy,admin}.ts` | 용도별 Supabase 클라이언트 (`admin`은 secret 키 + `server-only`) |
+| `src/lib/auth.ts` | `getCurrentUser()`(getClaims), `requireUser()` |
+| `src/app/(auth)/` | 로그인·회원가입 폼과 Server Action |
+| `src/app/auth/confirm/route.ts` | 이메일 확인 링크 처리 (오픈 리다이렉트 차단) |
+| `src/app/(protected)/dashboard/page.tsx` | 보호 페이지 예시 |
+| `CLAUDE.md` | 이 프로젝트의 규칙 (`@AGENTS.md` 포함) |
 
-export default function RootLayout({ children }: { children: React.ReactNode }) {
-  return (
-    <html lang="ko" className={pretendard.variable} suppressHydrationWarning>
-      <body className="font-sans antialiased">{children}</body>
-    </html>
-  );
-}
-```
+## 5. 검증
 
-4. `tailwind.config.ts`(또는 CSS 변수 방식)에서 `--font-pretendard`를 `font-sans`로 바인딩한다
-
-### Phase 5: 디렉토리 구조 생성
-
-아래 구조를 정확히 따른다:
-
-```
-src/
-├── app/
-│   ├── (auth)/
-│   │   ├── login/page.tsx
-│   │   └── signup/page.tsx
-│   ├── (protected)/
-│   │   └── dashboard/page.tsx
-│   ├── auth/
-│   │   └── confirm/route.ts
-│   ├── fonts/
-│   │   └── PretendardVariable.woff2
-│   ├── globals.css
-│   ├── layout.tsx
-│   └── page.tsx
-├── components/
-│   ├── ui/              ← ShadCN 컴포넌트 (자동 생성됨)
-│   └── providers/
-│       └── theme-provider.tsx
-├── lib/
-│   ├── supabase/
-│   │   ├── client.ts     ← 브라우저용 클라이언트
-│   │   ├── server.ts     ← Server Component용 클라이언트
-│   │   └── admin.ts      ← service_role 전용 (server-only)
-│   ├── utils.ts
-│   └── validations/
-│       └── auth.ts       ← zod 스키마
-├── hooks/
-│   └── use-user.ts
-├── types/
-│   └── database.ts       ← Supabase 타입 (gen types로 생성)
-└── middleware.ts
-```
-
-### Phase 6: 보안 파일 생성
-
-`references/security-config.md`를 읽고, 아래 파일들을 정확히 생성한다:
-
-1. **`src/middleware.ts`** — CSP nonce + Supabase 세션 갱신 + 보호 라우트 리다이렉트
-2. **`src/lib/supabase/client.ts`** — `createBrowserClient` 래퍼
-3. **`src/lib/supabase/server.ts`** — `createServerClient` 래퍼 (쿠키 기반)
-4. **`src/lib/supabase/admin.ts`** — `import 'server-only'` + `service_role` 클라이언트
-5. **`src/app/auth/confirm/route.ts`** — PKCE 토큰 교환 핸들러
-
-각 파일의 정확한 코드는 `references/security-config.md`에 정의되어 있다.
-
-### Phase 7: 환경변수 및 설정 파일
-
-1. **`.env.local`** 생성:
-```bash
-# Public (클라이언트 노출 가능 — RLS가 보호)
-NEXT_PUBLIC_SUPABASE_URL=<your-supabase-url>
-NEXT_PUBLIC_SUPABASE_ANON_KEY=<your-anon-key>
-
-# Private (서버 전용 — 절대 NEXT_PUBLIC_ 접두사 금지)
-SUPABASE_URL=<your-supabase-url>
-SUPABASE_SERVICE_ROLE_KEY=<your-service-role-key>
-```
-
-2. **`.env.example`** 생성 (키값 없이 구조만)
-
-3. **`.gitignore`** 업데이트:
-```
-.env.local
-.env*.local
-```
-
-4. **`next.config.ts`** 보안 헤더 추가 (references/security-config.md 참조)
-
-### Phase 8: CLAUDE.md 생성
-
-`references/CLAUDE.md.template`를 읽고, `<project-name>`을 실제 프로젝트 이름으로 치환하여 프로젝트 루트에 `CLAUDE.md`를 생성한다.
-
-### Phase 9: 최종 검증
+모두 통과해야 끝난다. 실패하면 원인을 고치고 다시 돌린다. 템플릿 결함이면 사용자에게 알린다.
 
 ```bash
+pnpm lint
+pnpm typecheck
 pnpm build
+node "${CLAUDE_PLUGIN_ROOT}/skills/web-security-audit/scripts/audit.mjs" .
 ```
 
-빌드 성공을 확인한다. 실패 시 에러를 분석하고 수정한다.
+placeholder `.env.local`로도 빌드는 성공해야 한다.
 
-## 참조 파일
+## 6. 보고
 
-| 파일 | 용도 | 읽는 시점 |
-|------|------|-----------|
-| `references/security-config.md` | 보안 관련 파일의 정확한 코드 | Phase 6, 7 |
-| `references/CLAUDE.md.template` | CLAUDE.md 템플릿 | Phase 8 |
+사용자에게 다음을 알린다.
+1. `.env.local`에 실제 값 넣기: Supabase 대시보드 > Project Settings > API Keys의 publishable·secret 키, Project URL, project ref.
+2. Supabase Auth 설정: Authentication > URL Configuration의 Site URL과 Redirect URL에 `http://localhost:3000/auth/confirm` 추가. 이메일 템플릿의 확인 링크를 `{{ .SiteURL }}/auth/confirm?token_hash={{ .TokenHash }}&type=email&next=/dashboard`로 변경.
+3. 다음 단계: 테이블은 `/web:supabase-table`, 화면은 `/web:nextjs-feature`, 점검은 `/web:web-security-audit`.
 
-## 주의사항
-
-- **결정론적 실행**: 사용자 선택지를 최소화하고, 모든 설정은 이 스킬에 정의된 고정값을 따른다
-- **보안 우선**: 4계층 방어(Edge → Middleware → Server Component → RLS)를 기본 적용한다
-- **ISR 금지**: 인증 관련 페이지에서 `export const dynamic = 'force-dynamic'`을 반드시 설정한다
-- **미들웨어 의존 금지**: 미들웨어는 낙관적 검증만 수행. 실제 인증은 Server Component에서 `getUser()` 호출
-- **service_role 격리**: `import 'server-only'` 필수, `NEXT_PUBLIC_` 접두사 절대 금지
+git 초기화는 create-next-app이 이미 했다. 커밋은 사용자가 요청할 때만 한다.

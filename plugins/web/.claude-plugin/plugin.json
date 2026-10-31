@@ -1,7 +1,7 @@
 {
   "name": "web",
-  "description": "웹 개발(Next.js) 전용 Claude Code 플러그인",
-  "version": "1.0.0",
+  "description": "Next.js + Supabase 웹 개발 도구: 프로젝트 초기화, 테이블·RLS 마이그레이션, 기능 화면 생성, 보안 점검",
+  "version": "2.0.0",
   "author": {
     "name": "idghst"
   }
