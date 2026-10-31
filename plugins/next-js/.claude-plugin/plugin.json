@@ -1,6 +1,6 @@
 {
   "name": "next-js",
-  "description": "NEXT JS 개발 전용 Claude Code 플러그인",
+  "description": "Next.js 개발 전용 Claude Code 플러그인",
   "version": "1.0.0",
   "author": {
     "name": "idghst"

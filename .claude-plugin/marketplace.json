@@ -1,14 +1,14 @@
 {
+  "$schema": "https://json.schemastore.org/claude-code-marketplace.json",
   "name": "idghst-claude-code-plugins",
-  "version": "1.0.0",
-  "description": "Bundled plugins for Claude Code including Agent SDK development tools, PR review toolkit, and commit workflows",
+  "description": "idghst의 Claude Code 플러그인 모음 (스킬, 훅, MCP 등)",
   "owner": {
     "name": "idghst"
   },
   "plugins": [
     {
       "name": "next-js",
-      "description": "Development kit for working with the Claude Agent SDK",
+      "description": "Next.js + Supabase + ShadCN 프로젝트 초기화 등 Next.js 개발용 도구",
       "source": "./plugins/next-js",
       "category": "development"
     }
