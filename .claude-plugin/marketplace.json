@@ -11,6 +11,16 @@
       "description": "Next.js + Supabase + ShadCN 프로젝트 초기화 등 Next.js 개발용 도구",
       "source": "./plugins/next-js",
       "category": "development"
+    },
+    {
+      "name": "pstack",
+      "description": "Lauren Tan의 pstack (cursor/plugins 원본 참조): 원칙 기반 에이전트 워크플로와 스킬 모음",
+      "source": {
+        "source": "git-subdir",
+        "url": "cursor/plugins",
+        "path": "harness/pstack/claude-code"
+      },
+      "category": "development"
     }
   ]
 }
