@@ -27,7 +27,7 @@ plugins/<plugin>/
 3. README의 플러그인 목록 표에 한 줄 추가.
 4. `claude plugin validate .` 와 `claude plugin validate ./plugins/<plugin>` 실행.
 
-외부 플러그인은 기본적으로 `git-subdir`/`github` 소스로 원본을 참조한다. 엔트리 `name`은 원본 `plugin.json`의 `name`과 같게 한다.
+외부 플러그인은 기본적으로 `git-subdir`/`github` 소스로 원본을 참조한다. 엔트리 `name`은 원본 `plugin.json`의 `name`과 같게 한다. 원본 참조 소스에는 검토한 커밋의 전체 `sha`(40자)를 넣어 고정하고, 원본을 갱신할 때는 새 커밋을 검토한 뒤 `sha`를 바꾼다.
 
 예외: `plugins/pstack`은 claude.ai 동기화 경고(`$schema` 키)를 없애려고 복사한 사본이다. 원본은 cursor/plugins의 `harness/pstack/claude-code`(마지막 동기화 커밋 `4dd1d05`, v0.15.36). 직접 수정하지 않는다. 갱신 절차:
 

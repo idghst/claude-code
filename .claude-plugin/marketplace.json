@@ -24,7 +24,8 @@
       "source": {
         "source": "git-subdir",
         "url": "https://github.com/johnnyvizz/claude-kit.git",
-        "path": "plugins/savvy-flow"
+        "path": "plugins/savvy-flow",
+        "sha": "c871c153ead54ad9547cc717d0f3e5a676c73986"
       },
       "category": "development"
     },
@@ -34,7 +35,8 @@
       "source": {
         "source": "git-subdir",
         "url": "https://github.com/johnnyvizz/claude-kit.git",
-        "path": "plugins/savvy-progress"
+        "path": "plugins/savvy-progress",
+        "sha": "c871c153ead54ad9547cc717d0f3e5a676c73986"
       },
       "category": "mod"
     },
@@ -43,7 +45,8 @@
       "description": "data-goblin/claude-code-filetree 원본 참조: git 상태와 Claude 작업 위치를 보여 주는 파일 트리 mod",
       "source": {
         "source": "github",
-        "repo": "data-goblin/claude-code-filetree"
+        "repo": "data-goblin/claude-code-filetree",
+        "sha": "dc828bc52ffba118a01721dc91ca501a7162edf8"
       },
       "category": "mod"
     },
@@ -53,7 +56,8 @@
       "source": {
         "source": "git-subdir",
         "url": "https://github.com/anthropics/claude-code-playground.git",
-        "path": "claude-code/mods/replay-theater"
+        "path": "claude-code/mods/replay-theater",
+        "sha": "569c5283d9a0a7ee7938df85bb32e4f48cbb8c86"
       },
       "category": "mod"
     }
