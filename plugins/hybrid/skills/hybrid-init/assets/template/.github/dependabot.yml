@@ -1,0 +1,11 @@
+# 스펙 8.7: 의존성 업데이트 PR 자동 생성. 보안 업데이트 PR은 저장소 설정의 Dependabot security updates로 켠다.
+version: 2
+updates:
+  - package-ecosystem: npm
+    directory: /
+    schedule:
+      interval: weekly
+  - package-ecosystem: github-actions
+    directory: /
+    schedule:
+      interval: weekly

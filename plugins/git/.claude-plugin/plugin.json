@@ -1,0 +1,8 @@
+{
+  "name": "git",
+  "description": "Git 형상관리 스킬 모음: 브랜치 전략, develop 기반 feature 작업, PR 검토 후 머지, 기능별 main 반영, 저장소 점검",
+  "version": "1.3.0",
+  "author": {
+    "name": "idghst"
+  }
+}

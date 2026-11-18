@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- HTTPS만 허용 (스펙 8.2). 예외 도메인을 추가하지 않는다. AndroidManifest.xml의 networkSecurityConfig로 연결된다. -->
+<network-security-config>
+    <base-config cleartextTrafficPermitted="false" />
+</network-security-config>

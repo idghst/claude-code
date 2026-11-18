@@ -7,15 +7,15 @@
   },
   "plugins": [
     {
-      "name": "web",
-      "description": "Next.js + Supabase 웹 개발 도구: 초기화, 테이블·RLS, 기능 화면, 보안 점검",
-      "source": "./plugins/web",
+      "name": "hybrid",
+      "description": "Capacitor + SvelteKit 하이브리드 앱 도구: 초기화, 네이티브 기능, 보안 점검",
+      "source": "./plugins/hybrid",
       "category": "development"
     },
     {
-      "name": "pstack",
-      "description": "Lauren Tan의 pstack (cursor/plugins 사본): 원칙 기반 에이전트 워크플로와 스킬 모음",
-      "source": "./plugins/pstack",
+      "name": "git",
+      "description": "Git 형상관리 스킬 모음: 브랜치 전략 등",
+      "source": "./plugins/git",
       "category": "development"
     },
     {
@@ -61,8 +61,5 @@
       },
       "category": "mod"
     }
-  ],
-  "renames": {
-    "next-js": "web"
-  }
+  ]
 }

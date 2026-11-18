@@ -1,0 +1,8 @@
+{
+  "name": "hybrid",
+  "description": "Capacitor + SvelteKit 하이브리드 모바일 앱 도구: 보안 기본값을 갖춘 프로젝트 초기화, 네이티브 기능 어댑터 추가, 보안 점검",
+  "version": "1.0.0",
+  "author": {
+    "name": "idghst"
+  }
+}
